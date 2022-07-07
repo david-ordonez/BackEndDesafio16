@@ -5,13 +5,15 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "start": "node src/main.js",
-    "watch": "nodemon --inspect src/main.js -e ejs,html,js,json"
+    "start": "0x src/main.js",
+    "watch": "nodemon --inspect src/main.js -e ejs,html,js,json",
+    "test": "node src/benchmark.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autocannon": "^7.9.0",
     "bcrypt": "^5.0.1",
     "compression": "^1.7.4",
     "connect-mongo": "^4.5.0",
