@@ -11,6 +11,7 @@ import os  from 'os';
 import authWebRouter from "./routers/web/auth.js";
 import homeWebRouter from "./routers/web/home.js";
 import infoWebRouter from "./routers/web/info.js";
+import { logRequests,logError,logNotFound } from "./routers/middleware/loggermw.js";
 import productosApiRouter from "./routers/api/productos.js";
 
 import addProductosHandlers from "./routers/ws/productos.js";
@@ -41,10 +42,10 @@ io.on("connection", async (socket) => {
 //--------------------------------------------
 // configuro el servidor
 
+app.use(logRequests);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
 app.set("view engine", "ejs");
 
 app.use(
@@ -71,6 +72,8 @@ app.use("/", homeWebRouter);
 app.use("/", authWebRouter);
 app.use("/", infoWebRouter);
 app.use("/api", randomApiRouter);
+app.use(logError);
+app.use(logNotFound);
 //--------------------------------------------
 // inicio el servidor
 
